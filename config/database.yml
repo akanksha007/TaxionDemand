@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  database: TaxionDemand
+  pool: 5
+  username: postgres
+  password: postgres
