@@ -1,9 +1,13 @@
 class CabController < ApplicationController
 
   def book_cab
-    location = getlocation()
-    cab = find_nearest_cab(location)
-    status = start_ride(cab,location)  
+    cab = Cab.where(:user_id => params[:user_id])
+    if cab.blank?
+      location = getlocation()
+      cab = find_nearest_cab(location)
+    else
+      render :end_ride
+    end
   end
   
   def getlocation()
@@ -13,13 +17,20 @@ class CabController < ApplicationController
   end
   
   def find_nearest_cab(location)
-    cab = Cab.where(:status => "unreserved").closest(origin: location)
+    cab = Cab.where(:status => "unreserved").closest(origin: location).first
+    if cab.blank?
+      render :no_cab
+    else
+      @cab = cab.update_attributes(:status => "booked", :user_id => params[:user_id], :latitude => location[0], :longitude => location[1])
+      render :book_cab
+    end
   end
   
-  def start_ride(cab,location)
+  def end_ride
     user_id = params[:user_id]
-    @cab = Cab.update_all(:status => "booked", :user_id => user_id, :latitude => location[0], :longitude => location[1])
+    cab = Cab.find_by(:user_id => user_id)
+    cab.update_attributes(:status => "unreserved", :user_id => nil)
+    render :book_cab
   end
-  
 end
 

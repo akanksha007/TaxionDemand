@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   get 'book_cab/:user_id' => 'cab#book_cab', as: :book_cab
-  get 'start_ride/:user_id' => 'cab#start_ride', as: :start_ride
+  get 'end_ride/:user_id' => 'cab#end_ride', as: :end_ride
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
