@@ -1,0 +1,16 @@
+<%= "List of unreserved  cabs" %>
+<br />
+<% @unreserved_cab.each do |cab|%>
+  <%= cab.number %>
+  <%= cab.color %>
+  <br />
+<% end %>
+
+<%= "List of booked cabs" %>
+<br />
+<% @booked_cab.each do |cab|%>
+  <%= cab.number %>
+  <%= cab.color %>
+  <%= cab.user.name %>
+  <br />
+<% end %>

@@ -32,5 +32,10 @@ class CabController < ApplicationController
     cab.update_attributes(:status => "unreserved", :user_id => nil)
     render :book_cab
   end
+  
+  def show
+    @unreserved_cab = Cab.where(:status => "unreserved")
+    @booked_cab = Cab.where(:status => "booked")
+  end
 end
 

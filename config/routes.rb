@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   get 'book_cab/:user_id' => 'cab#book_cab', as: :book_cab
   get 'end_ride/:user_id' => 'cab#end_ride', as: :end_ride
-
+  get 'show' => 'cab#show'
+ 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
